@@ -1,0 +1,39 @@
+<div class="col-sm-2"></div>
+<div class="pull-left col-span-4">
+    <div>
+        <button (click)="onClick()" [disabled]="ToggleButton" class="btn btn-lg btn-default">Get a Parking spot</button>
+        <br />
+
+    </div>
+    <div *ngIf="ToggleButton">
+        <label>Parking Slots are Full !!</label> <br />
+
+    </div>
+    <div *ngIf="showDetails && !ToggleButton">
+        <label>Ticket Details</label> <br />
+        <label> {{clickMessage}}</label><br />
+        <label>{{timeParked}}</label>
+    </div>
+</div>
+
+<div class="pull-right col-sm-5">
+
+    <input type="text" name="ticket_id" #ticket_id="ngModel" (ngModel)="ticketService.ticket.ticket_id"
+        placeholder="Enter ticket_id" style="color:black">
+    <br/>
+    <br/>
+    <button (click)="getPaymentDetails(ticket_id)" class="btn btn-lg btn-default">Get parking charges</button>
+    <br />
+
+    {{CreditCardCheck}}<br />
+    <div *ngIf="IsVisible">
+       Amount owed: {{payment|currency}}<br />
+       
+        <input type="text" name="creditCardNumber" #creditCardNumber="ngModel"
+            (ngModel)="ticketService.ticket.creditCardNumber" placeholder="Enter Credit card number"
+            style="color:black"><br /><br/>
+        <button (click)="onPay(ticket_id,creditCardNumber)" class="btn btn-lg btn-default">Pay</button>
+    </div>
+
+</div>
+<div class="col-sm-1"></div>
